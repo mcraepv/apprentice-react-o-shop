@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+
 import './Header.module.scss';
 import history from '../../utils/history';
 import routePaths from '../../constants/routePaths';

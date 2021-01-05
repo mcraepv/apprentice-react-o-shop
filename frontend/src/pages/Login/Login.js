@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 import Form from '../../components/Form/Form';
+import { loginActions } from '../../store/login/action';
 
 const Login = () => {
   const inputs = ['username', 'password'];
 
-  //the console log is a placeholder for a submit handler that will likely make API queries
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loginActions.logout());
+  }, [dispatch]);
+
   return (
     <Form
       formType="Login"
-      handleSubmit={() => console.log('submit')}
+      handleSubmit={(inputs) =>
+        dispatch(loginActions.login(inputs.username, inputs.password))
+      }
       inputsArr={inputs}
     />
   );

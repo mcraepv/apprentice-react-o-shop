@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import routePaths from '../../constants/routePaths';
 
 const Form = (props) => {
@@ -23,15 +24,16 @@ const Form = (props) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    //checking for empty fields
+
     setSubmitted(true);
+
     for (const prop in inputs) {
       if (!inputs[prop]) {
         return;
       }
     }
 
-    handleSubmit();
+    handleSubmit(inputs);
   };
 
   const onChange = (event) => {

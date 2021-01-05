@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+
 import { Login, Register, Home } from './pages/pages';
 import routePaths from './constants/routePaths';
 import PrivateRoute from './components/Shared/PrivateRoute';
