@@ -3,8 +3,8 @@ localStorage.setItem(
   'users',
   JSON.stringify([
     {
-      firstName: 'ahmed',
-      lastName: 'aly',
+      firstName: 'Ahmed',
+      lastName: 'Aly',
       username: 'ahmed.aly',
       password: 'umbrage',
       id: 1,

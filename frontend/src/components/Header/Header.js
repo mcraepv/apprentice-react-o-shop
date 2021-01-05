@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import './Header.module.scss';
 import history from '../../utils/history';
@@ -39,6 +40,14 @@ const Header = () => {
       </div>
       <div className="dropdown-item">Log Out</div>
     </div>
+  );
+
+  const fullName = useSelector(
+    ({
+      login: {
+        user: { firstName, lastName },
+      },
+    }) => firstName + ' ' + lastName
   );
 
   return (
@@ -94,7 +103,7 @@ const Header = () => {
                   toggleDropdown(dropdown);
                 }}
               >
-                Username
+                {fullName ? fullName : 'User'}
               </div>
               {dropdown ? dropdownMenu : null}
             </li>
