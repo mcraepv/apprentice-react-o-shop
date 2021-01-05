@@ -10,7 +10,9 @@ const Login = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loginActions.logout());
+    if (JSON.parse(localStorage.getItem('user'))) {
+      dispatch(loginActions.logout());
+    }
   }, [dispatch]);
 
   return (

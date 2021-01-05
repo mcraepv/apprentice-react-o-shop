@@ -1,3 +1,5 @@
+import handleResponse from './handleResponse';
+
 const login = (username, password) => {
   const body = {
     username: username,
@@ -30,22 +32,6 @@ const register = (user) => {
   };
 
   return fetch('/users/register', requestOptions).then(handleResponse);
-};
-
-const handleResponse = (response) => {
-  return response.text().then((text) => {
-    const data = text && JSON.parse(text);
-    if (!response.ok) {
-      if (response.status === 401) {
-        logout();
-        window.location.reload(true);
-      }
-
-      const err = (data && data.message) || response.statusText;
-      return Promise.reject(err);
-    }
-    return data;
-  });
 };
 
 export const userService = {

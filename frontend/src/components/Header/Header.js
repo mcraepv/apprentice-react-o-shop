@@ -1,12 +1,15 @@
 import { React, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import './Header.module.scss';
 import history from '../../utils/history';
 import routePaths from '../../constants/routePaths';
+import { loginActions } from '../../store/login/action';
 
 const Header = () => {
   const [dropdown, setDropdown] = useState(false);
+
+  const dispatch = useDispatch();
 
   const toggleDropdown = (bool) => {
     setDropdown(!bool);
@@ -38,7 +41,14 @@ const Header = () => {
       >
         Manage Products
       </div>
-      <div className="dropdown-item">Log Out</div>
+      <div
+        className="dropdown-item"
+        onClick={() => {
+          dispatch(loginActions.logout());
+        }}
+      >
+        Log Out
+      </div>
     </div>
   );
 

@@ -23,6 +23,7 @@ const login = (username, password) => {
 
 const logout = () => {
   userService.logout();
+  history.push(routePaths.home);
   return { type: actionTypes.LOGOUT };
 };
 
