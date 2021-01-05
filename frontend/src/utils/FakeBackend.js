@@ -13,6 +13,7 @@ localStorage.setItem(
 );
 // array in local storage for registered users
 let users = JSON.parse(localStorage.getItem('users')) || [];
+let products = JSON.parse(localStorage.getItem('products')) || [];
 
 export const configureFakeBackend = () => {
   let realFetch = window.fetch;
@@ -23,6 +24,8 @@ export const configureFakeBackend = () => {
     return new Promise((resolve, reject) => {
       const handleRoute = () => {
         switch (true) {
+          case url.endsWith('/products/add') && method === 'POST':
+            return addProduct();
           case url.endsWith('/users/authenticate') && method === 'POST':
             return authenticate();
           case url.endsWith('/users/register') && method === 'POST':
@@ -41,6 +44,18 @@ export const configureFakeBackend = () => {
       // wrap in timeout to simulate server api call
       setTimeout(handleRoute, 500);
       // route functions
+
+      const addProduct = () => {
+        const product = body;
+
+        product.id = products.length
+          ? Math.max(...products.map((x) => x.id)) + 1
+          : 1;
+        products.push(product);
+        localStorage.setItem('products', JSON.stringify(products));
+
+        return ok();
+      };
 
       const authenticate = () => {
         const { username, password } = body;
