@@ -22,6 +22,16 @@ const logout = () => {
   localStorage.removeItem('user');
 };
 
+const register = (user) => {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user),
+  };
+
+  return fetch('/users/register', requestOptions).then(handleResponse);
+};
+
 const handleResponse = (response) => {
   return response.text().then((text) => {
     const data = text && JSON.parse(text);
@@ -42,4 +52,5 @@ const handleResponse = (response) => {
 export const userService = {
   login,
   logout,
+  register,
 };

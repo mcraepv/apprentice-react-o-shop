@@ -62,11 +62,7 @@ export const configureFakeBackend = () => {
       const register = () => {
         const user = body;
 
-        if (
-          users.find(
-            (userStored) => userStored.username === userStored.username
-          )
-        ) {
+        if (users.find((userStored) => userStored.username === user.username)) {
           return error(`Username  ${user.username} is already taken`);
         }
 

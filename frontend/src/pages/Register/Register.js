@@ -1,15 +1,20 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import Form from '../../components/Form/Form';
+import { registerActions } from '../../store/register/action';
 
 const Register = () => {
   const inputs = ['firstname', 'lastname', 'username', 'password'];
 
-  //the console log exists as a placeholder for a later submit handler
+  const dispatch = useDispatch();
+
   return (
     <Form
       formType="Register"
-      handleSubmit={() => console.log('submit')}
+      handleSubmit={(inputs) => {
+        dispatch(registerActions.register(inputs));
+      }}
       inputsArr={inputs}
     />
   );
