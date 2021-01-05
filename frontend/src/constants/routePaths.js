@@ -7,4 +7,6 @@ export default {
   orders: '/orders',
   orderSuccess: '/order-success',
   shoppingCart: '/shopping-cart',
+  login: '/login',
+  register: '/register',
 };
