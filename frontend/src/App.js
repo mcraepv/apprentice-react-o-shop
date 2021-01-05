@@ -7,7 +7,7 @@ import PrivateRoute from './components/Shared/PrivateRoute';
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="App container">
       <Switch>
         <Route path={routePaths.login} component={Login} />
         <Route path={routePaths.register} component={Register} />

@@ -17,6 +17,17 @@ export default (state = initialState, action) => {
       };
     case actions.ADD_FAILURE:
       return {};
+    case actions.GET_REQUEST:
+      return {
+        getting: true,
+      };
+    case actions.GET_SUCCESS:
+      return {
+        gotten: true,
+        products: action.products,
+      };
+    case actions.GET_FAILURE:
+      return {};
     default:
       return state;
   }
