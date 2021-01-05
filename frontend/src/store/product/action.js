@@ -10,6 +10,7 @@ const addProduct = (product) => {
     productService.addProduct(product).then(
       (product) => {
         dispatch({ type: actionTypes.ADD_SUCCESS, product });
+
         history.push(routePaths.adminProducts);
       },
       (error) => {
@@ -27,11 +28,10 @@ const getProducts = () => {
     productService.getProducts().then(
       (products) => {
         dispatch({ type: actionTypes.GET_SUCCESS, products });
-        history.push(routePaths.adminProducts);
       },
       (error) => {
         console.log(error);
-        dispatch({ type: actionTypes.GET_FAILURE, error });
+        dispatch({ type: actionTypes.ADD_FAILURE, error });
       }
     );
   };

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import Form from '../../components/Form/Form';
 import ProductCard from '../../components/ProductCard/ProductCard';
@@ -12,15 +13,37 @@ const NewProduct = () => {
     category: '',
     imageURL: '',
   });
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(productActions.getProducts());
+  }, [dispatch]);
+
+  const params = useParams();
+
+  const products = useSelector(({ products: { products } }) => products);
+
+  const product =
+    params.id && products
+      ? products.find((match) => match.id === parseInt(params.id))
+      : null;
+
+  useEffect(() => {
+    if (!product) return;
+    setFormInputs(() => ({
+      ...product,
+    }));
+  }, [product]);
+
   const inputs = ['title', 'price', 'category', 'imageURL'];
+
   const categories = [
     { name: 'Bread', id: 'bread' },
     { name: 'Vegetables', id: 'vegetables' },
     { name: 'Fruits', id: 'fruits' },
     { name: 'Dairy', id: 'dairy' },
   ];
-
-  const dispatch = useDispatch();
 
   return (
     <div className="row">
@@ -38,6 +61,7 @@ const NewProduct = () => {
               [name]: value,
             }));
           }}
+          existingValues={product}
         />
       </div>
       <div className="col-4">

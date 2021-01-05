@@ -31,7 +31,7 @@ const Main = () => {
         <Route exact path={routePaths.shoppingCart} component={ShoppingCart} />
         <Route
           exact
-          path={routePaths.adminProducts + routePaths.newProduct}
+          path={routePaths.adminProducts + routePaths.newProduct + '/:id?'}
           component={NewProduct}
         />
       </Switch>
