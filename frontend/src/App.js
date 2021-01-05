@@ -1,12 +1,17 @@
 import React from 'react';
-import Header from './components/Header/Header';
-import Main from './components/Main/Main';
+import { Route, Switch } from 'react-router-dom';
+import { Login, Register, Home } from './pages/pages';
+import routePaths from './constants/routePaths';
+import PrivateRoute from './components/Shared/PrivateRoute';
 
 const App = () => {
   return (
     <div className="App">
-      <Header />
-      <Main />
+      <Switch>
+        <Route path={routePaths.login} component={Login} />
+        <Route path={routePaths.register} component={Register} />
+        <PrivateRoute path={routePaths.home} component={Home} />
+      </Switch>
     </div>
   );
 };
