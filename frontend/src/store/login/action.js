@@ -13,9 +13,9 @@ const login = (username, password) => {
 
         history.push(routePaths.home);
       },
-      (err) => {
-        console.log(err);
-        dispatch({ type: actionTypes.LOGIN_FAILURE, err });
+      (error) => {
+        console.log(error);
+        dispatch({ type: actionTypes.LOGIN_FAILURE, error });
       }
     );
   };

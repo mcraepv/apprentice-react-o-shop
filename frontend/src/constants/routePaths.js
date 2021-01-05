@@ -9,6 +9,7 @@ const routePaths = {
   shoppingCart: '/shopping-cart',
   login: '/login',
   register: '/register',
+  newProduct: '/new-product',
 };
 
 export default routePaths;

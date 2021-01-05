@@ -10,36 +10,30 @@ import {
   Orders,
   OrderSuccess,
   ShoppingCart,
+  NewProduct,
 } from '../../pages/pages';
 import routePaths from '../../constants/routePaths';
 
 const Main = () => {
   return (
-    <main className="mt-5 pt-3">
+    <main className="mt-5 pt-3 container">
       <Switch>
-        <Route exact path={routePaths.home} component={Products}></Route>
-        <Route
-          exact
-          path={routePaths.adminOrders}
-          component={AdminOrders}
-        ></Route>
+        <Route exact path={routePaths.home} component={Products} />
+        <Route exact path={routePaths.adminOrders} component={AdminOrders} />
         <Route
           exact
           path={routePaths.adminProducts}
           component={AdminProducts}
-        ></Route>
-        <Route exact path={routePaths.checkout} component={CheckOut}></Route>
-        <Route exact path={routePaths.orders} component={Orders}></Route>
+        />
+        <Route exact path={routePaths.checkout} component={CheckOut} />
+        <Route exact path={routePaths.orders} component={Orders} />
+        <Route exact path={routePaths.orderSuccess} component={OrderSuccess} />
+        <Route exact path={routePaths.shoppingCart} component={ShoppingCart} />
         <Route
           exact
-          path={routePaths.orderSuccess}
-          component={OrderSuccess}
-        ></Route>
-        <Route
-          exact
-          path={routePaths.shoppingCart}
-          component={ShoppingCart}
-        ></Route>
+          path={routePaths.adminProducts + routePaths.newProduct}
+          component={NewProduct}
+        />
       </Switch>
     </main>
   );

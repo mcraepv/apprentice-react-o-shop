@@ -44,7 +44,6 @@ const handleResponse = (response) => {
       const err = (data && data.message) || response.statusText;
       return Promise.reject(err);
     }
-
     return data;
   });
 };
