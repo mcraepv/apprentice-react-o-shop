@@ -6,5 +6,8 @@
     "start": "cd frontend && yarn start"
   },
   "repository": "git@github.com:mcraepv/apprentice-react-o-shop.git",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "node-sass": "^5.0.0"
+  }
 }

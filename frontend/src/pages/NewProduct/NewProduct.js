@@ -1,5 +1,7 @@
 import React from 'react';
 import Form from '../../components/Form/Form';
+import productActions from '../../store/product/action';
+import { useDispatch } from 'react-redux';
 
 const AdminProducts = () => {
   const inputs = ['title', 'price', 'category', 'imageURL'];
@@ -10,12 +12,13 @@ const AdminProducts = () => {
     { name: 'Dairy', id: 'dairy' },
   ];
 
+  const dispatch = useDispatch();
+
   return (
     <Form
       formType="New Product"
       handleSubmit={(inputs) => {
-        //placeholder
-        console.log(inputs);
+        dispatch(productActions.addProduct(inputs));
       }}
       inputsArray={inputs}
       categoriesArray={categories}
