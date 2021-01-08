@@ -1,4 +1,4 @@
-export default {
+const routePaths = {
   home: '/',
   products: '/products',
   adminOrders: '/admin-orders',
@@ -10,3 +10,5 @@ export default {
   login: '/login',
   register: '/register',
 };
+
+export default routePaths;
