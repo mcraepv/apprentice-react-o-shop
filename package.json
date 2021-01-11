@@ -2,6 +2,9 @@
   "name": "apprentice-react-o-shop",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "start": "cd frontend && yarn start"
+  },
   "repository": "git@github.com:mcraepv/apprentice-react-o-shop.git",
   "license": "MIT"
 }
