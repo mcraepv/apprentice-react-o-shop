@@ -10,6 +10,7 @@ const login = (username, password) => {
     userService.login(username, password).then(
       (user) => {
         dispatch({ type: actionTypes.LOGIN_SUCCESS, user });
+
         history.push(routePaths.home);
       },
       (err) => {

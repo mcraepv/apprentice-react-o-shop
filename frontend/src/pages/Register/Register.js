@@ -5,7 +5,7 @@ import Form from '../../components/Form/Form';
 import { registerActions } from '../../store/register/action';
 
 const Register = () => {
-  const inputs = ['firstname', 'lastname', 'username', 'password'];
+  const inputs = ['firstName', 'lastName', 'username', 'password'];
 
   const dispatch = useDispatch();
 
