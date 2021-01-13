@@ -19,7 +19,7 @@ const Login = () => {
       handleSubmit={(inputs) =>
         dispatch(loginActions.login(inputs.username, inputs.password))
       }
-      inputsArr={inputs}
+      inputsArray={inputs}
     />
   );
 };

@@ -15,7 +15,7 @@ const Register = () => {
       handleSubmit={(inputs) => {
         dispatch(registerActions.register(inputs));
       }}
-      inputsArr={inputs}
+      inputsArray={inputs}
     />
   );
 };

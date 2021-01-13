@@ -3,62 +3,127 @@ import { Link } from 'react-router-dom';
 
 import routePaths from '../../constants/routePaths';
 
-const Form = (props) => {
-  const { formType, handleSubmit, inputsArr } = props;
-
+const Form = ({ formType, handleSubmit, inputsArray, categoriesArray }) => {
   const inputsMap = {};
 
-  const oppositeType = formType === 'Register' ? 'Login' : 'Register';
+  const oppositeType =
+    formType === 'Register' ? 'Login' : formType === 'Login' ? 'Register' : '';
 
-  //mapping inputsArr prop to object for use in UseState hook
-  inputsArr.forEach((input) => {
-    inputsMap[input] = '';
+  const buttonText =
+    formType === 'New Product' ? 'Create New Product' : formType;
+
+  //mapping inputsArray prop to object for use in UseState hook
+  inputsArray.forEach((input) => {
+    inputsMap[input] = {
+      value: '',
+      isValid: false,
+    };
   });
 
   const [inputs, setInputs] = useState(inputsMap);
 
   //this exists to keep any value change separate from the inputsMap and the state hook
+  //until we are ready to update
   const inputsDestructure = { ...inputs };
 
   const [submitted, setSubmitted] = useState(false);
 
   const onSubmit = (event) => {
     event.preventDefault();
-
     setSubmitted(true);
+    const inputsResponse = {};
+    let isValidSubmit = true;
 
-    for (const prop in inputs) {
-      if (!inputs[prop]) {
+    Object.entries(inputs).forEach(([key, { isValid, value }]) => {
+      if (!isValid) {
+        isValidSubmit = false;
         return;
       }
-    }
+      inputsResponse[key] = value;
+    });
 
-    handleSubmit(inputs);
+    if (!isValidSubmit) return;
+
+    handleSubmit(inputsResponse);
   };
 
-  const onChange = (event) => {
-    const { name, value } = event.target;
-    setInputs((inputs) => ({ ...inputs, [name]: value }));
+  const onChange = ({ target: { name, value } }) => {
+    let isValid;
+
+    if ((name === 'price' && isNaN(value)) || !value) {
+      isValid = false;
+    } else isValid = true;
+
+    setInputs((inputs) => ({
+      ...inputs,
+      [name]: {
+        value,
+        isValid,
+      },
+    }));
   };
 
-  const formFields = inputsArr.map((input, index) => (
-    <div className="form-group" key={index}>
+  const formFields = inputsArray.map((input, index) => {
+    const inputField = (
       <input
         type={input === 'password' ? 'password' : 'text'}
         name={input}
-        placeholder={input}
-        value={inputsDestructure[input]}
+        placeholder={input === 'price' ? '0.00' : input}
+        value={inputsDestructure[input].value}
         onChange={onChange}
         className={
           'form-control' +
-          (submitted && !inputsDestructure[input] ? ' is-invalid' : '')
+          (submitted && !inputsDestructure[input].isValid ? ' is-invalid' : '')
         }
       />
-      {submitted && !inputsDestructure[input] && (
-        <div className="invalid-feedback">{input} is required</div>
-      )}
-    </div>
-  ));
+    );
+
+    const priceModifier = (
+      <div className="input-group">
+        <div className="input-group-prepend">
+          <span className="input-group-text">$</span>
+        </div>
+        {inputField}
+      </div>
+    );
+
+    const categoryList = categoriesArray
+      ? categoriesArray.map((category, index) => {
+          return (
+            <option value={category.id} key={index}>
+              {category.name}
+            </option>
+          );
+        })
+      : null;
+
+    const categoryModifier = (
+      <div
+        className={
+          'input-group mb-3' +
+          (submitted && !inputsDestructure[input].isValid ? ' is-invalid' : '')
+        }
+      >
+        <select className="custom-select" onChange={onChange} name={input}>
+          <option defaultValue>{input}</option>
+          {categoryList}
+        </select>
+      </div>
+    );
+
+    return (
+      <div className="form-group" key={index}>
+        {input === 'price'
+          ? priceModifier
+          : input === 'category'
+          ? categoryModifier
+          : inputField}
+        {submitted && !inputsDestructure[input].isValid && (
+          <div className="text-danger">Valid {input} is required.</div>
+        )}
+      </div>
+    );
+  });
 
   return (
     <div className="col-lg-4 offset-lg-4">
@@ -66,13 +131,15 @@ const Form = (props) => {
       <form name="form" onSubmit={onSubmit}>
         {formFields}
         <div className="form-group">
-          <button className="btn bt-primary">{formType}</button>
-          <Link
-            to={routePaths[oppositeType.toLowerCase()]}
-            className="btn btn-link"
-          >
-            {oppositeType}
-          </Link>
+          <button className="btn btn-secondary">{buttonText}</button>
+          {oppositeType.length ? (
+            <Link
+              to={routePaths[oppositeType.toLowerCase()]}
+              className="btn btn-link"
+            >
+              {oppositeType}
+            </Link>
+          ) : null}
         </div>
       </form>
     </div>
