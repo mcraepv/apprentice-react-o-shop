@@ -1,4 +1,8 @@
 //simulating a pre-registered user for testing
+import newProducts from '../constants/dummyProducts';
+
+localStorage.setItem('new-products', JSON.stringify(newProducts));
+
 localStorage.setItem(
   'users',
   JSON.stringify([
@@ -55,6 +59,8 @@ export const configureFakeBackend = () => {
     return new Promise((resolve, reject) => {
       const handleRoute = () => {
         switch (true) {
+          case url.endsWith('/new-products/get') && method === 'GET':
+            return getNewProducts();
           case url.endsWith('/products/get') && method === 'GET':
             return getProducts();
           case url.endsWith('/products/add') && method === 'POST':
@@ -77,6 +83,12 @@ export const configureFakeBackend = () => {
       // wrap in timeout to simulate server api call
       setTimeout(handleRoute, 500);
       // route functions
+
+      const getNewProducts = () => {
+        const newProducts = JSON.parse(localStorage.getItem('new-products'));
+
+        return ok(newProducts);
+      };
 
       const getProducts = () => {
         const products = JSON.parse(localStorage.getItem('products'));
