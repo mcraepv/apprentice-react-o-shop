@@ -9,6 +9,7 @@ const Form = ({
   inputsArray,
   categoriesArray,
   onChangeParentUpdate,
+  existingValues,
 }) => {
   const inputsMap = {};
 
@@ -23,6 +24,7 @@ const Form = ({
     inputsMap[input] = {
       value: '',
       isValid: false,
+      hasChanged: false,
     };
   });
 
@@ -65,6 +67,7 @@ const Form = ({
       [name]: {
         value,
         isValid,
+        hasChanged: true,
       },
     }));
 
@@ -79,7 +82,11 @@ const Form = ({
         type={input === 'password' ? 'password' : 'text'}
         name={input}
         placeholder={input === 'price' ? '0.00' : input}
-        value={inputsDestructure[input].value}
+        value={
+          !inputs[input].hasChanged && existingValues
+            ? existingValues[input]
+            : inputsDestructure[input].value
+        }
         onChange={onChange}
         className={
           'form-control' +
@@ -114,7 +121,12 @@ const Form = ({
           (submitted && !inputsDestructure[input].isValid ? ' is-invalid' : '')
         }
       >
-        <select className="custom-select" onChange={onChange} name={input}>
+        <select
+          className="custom-select"
+          onChange={onChange}
+          name={input}
+          value={existingValues ? existingValues[input].toLowerCase() : ''}
+        >
           <option defaultValue>{input}</option>
           {categoryList}
         </select>

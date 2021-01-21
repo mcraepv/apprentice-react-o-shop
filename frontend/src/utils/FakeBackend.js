@@ -18,24 +18,24 @@ localStorage.setItem(
     {
       title: 'Apple',
       price: '1.00',
-      category: 'Fruits',
-      image:
+      category: 'fruits',
+      imageURL:
         'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=2250&q=80',
       id: 1,
     },
     {
       title: 'Celery',
       price: '2.00',
-      category: 'Vegetables',
-      image:
+      category: 'vegetables',
+      imageURL:
         'https://images.unsplash.com/photo-1601459427108-47e20d579a35?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=975&q=80',
       id: 2,
     },
     {
       title: 'Mango',
       price: '4.00',
-      category: 'Fruits',
-      image:
+      category: 'fruits',
+      imageURL:
         'https://images.unsplash.com/photo-1587486936739-78df7470c7e0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1401&q=80',
       id: 3,
     },

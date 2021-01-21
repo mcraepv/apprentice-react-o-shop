@@ -17,7 +17,7 @@ const Table = (props) => {
       <td>{dataElement.price}</td>
       {isEditable && (
         <td>
-          <Link to={editURL} className="btn btn-link">
+          <Link to={editURL + '/' + dataElement.id} className="btn btn-link">
             Edit
           </Link>
         </td>
