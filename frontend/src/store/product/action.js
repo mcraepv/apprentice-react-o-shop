@@ -20,6 +20,24 @@ const addProduct = (product) => {
   };
 };
 
+const getProducts = () => {
+  return (dispatch) => {
+    dispatch({ type: actionTypes.GET_REQUEST });
+
+    productService.getProducts().then(
+      (products) => {
+        dispatch({ type: actionTypes.GET_SUCCESS, products });
+        history.push(routePaths.adminProducts);
+      },
+      (error) => {
+        console.log(error);
+        dispatch({ type: actionTypes.GET_FAILURE, error });
+      }
+    );
+  };
+};
+
 export default {
   addProduct,
+  getProducts,
 };

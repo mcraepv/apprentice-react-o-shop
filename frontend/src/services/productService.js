@@ -12,6 +12,18 @@ const addProduct = (product) => {
   );
 };
 
+const getProducts = () => {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  return fetch('http://localhost:4000/products/get', requestOptions).then(
+    handleResponse
+  );
+};
+
 export default {
   addProduct,
+  getProducts,
 };

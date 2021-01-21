@@ -6,8 +6,8 @@ const handleResponse = (response) => {
         window.location.reload(true);
       }
 
-      const err = (data && data.message) || response.statusText;
-      return Promise.reject(err);
+      const error = (data && data.message) || response.statusText;
+      return Promise.reject(error);
     }
     return data;
   });

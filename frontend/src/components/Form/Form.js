@@ -3,7 +3,13 @@ import { Link } from 'react-router-dom';
 
 import routePaths from '../../constants/routePaths';
 
-const Form = ({ formType, handleSubmit, inputsArray, categoriesArray }) => {
+const Form = ({
+  formType,
+  handleSubmit,
+  inputsArray,
+  categoriesArray,
+  onChangeParentUpdate,
+}) => {
   const inputsMap = {};
 
   const oppositeType =
@@ -61,6 +67,10 @@ const Form = ({ formType, handleSubmit, inputsArray, categoriesArray }) => {
         isValid,
       },
     }));
+
+    if (onChangeParentUpdate) {
+      onChangeParentUpdate(name, value);
+    }
   };
 
   const formFields = inputsArray.map((input, index) => {
@@ -126,7 +136,7 @@ const Form = ({ formType, handleSubmit, inputsArray, categoriesArray }) => {
   });
 
   return (
-    <div className="col-lg-4 offset-lg-4">
+    <div>
       <h2>{formType}</h2>
       <form name="form" onSubmit={onSubmit}>
         {formFields}
